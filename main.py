@@ -15,6 +15,7 @@ def main():
     numOfWords = int(input("Enter number of words to replace: "))
 
     print(fileName)
+    print(numOfFiles)
 
 if __name__ == '__main__':
     main()
