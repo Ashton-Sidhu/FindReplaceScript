@@ -74,7 +74,6 @@ def main():
     print("")
     print("All files have been created successfully.")
 
-
 if __name__ == '__main__':
     main()
     
