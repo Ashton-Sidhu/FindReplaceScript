@@ -20,11 +20,16 @@ def ReadRepFile(repFile):
     Input: Words to be replace file name
     Ouput: List of words to replace for each file
    """
+    try:
+        with open(os.path.expanduser('~/Documents/' + repFile + ".txt")) as rFile:
+            lines = rFile.readlines()
+        lines = [x.strip().replace("=", ":").split(",") for x in lines]
+        return lines
 
-    with open(os.path.expanduser('~/Documents/' + repFile + ".txt")) as rFile:
-        lines = rFile.readlines()
-    lines = [x.strip().replace(" ", "").replace("=", ":").split(",") for x in lines]
-    return lines
+    except:
+        print("Cannot parse word replacement file.")
+        print("Please ensure it is following the file specifications described on the FindReplaceScript Github page README.")
+
 
 def ReadTempFile(tempFile):
     """
@@ -35,15 +40,18 @@ def ReadTempFile(tempFile):
     Input: Document file name
     Ouput: String content of file
    """
+    try:
+        doc = Document((os.path.expanduser('~/Documents/' + tempFile + ".docx")))
 
-    doc = Document((os.path.expanduser('~/Documents/' + tempFile + ".docx")))
+        docText = ""
+        
+        for para in doc.paragraphs:
+            docText += para.text
 
-    docText = ""
-    
-    for para in doc.paragraphs:
-        docText += para.text
+        return docText
 
-    return docText
+    except:
+        print("Cannot read word file.")
 
 def ListToDic(li):
     """
@@ -90,13 +98,42 @@ def WriteToFile(fileContent, index):
     doc.add_paragraph(fileContent)
     doc.save(os.path.expanduser('~/Documents/file' + str(index) + '.docx'))
 
+def FileExists(fileName, format):
+    """
+    Check if file exists in My Documents folder.
+
+    (String, String) -> Boolean
+
+    Input: Filename, File Format
+    Output: True if file exists, false otherwiese
+    """
+
+    if os.path.isfile(os.path.expanduser('~/Documents/' + fileName + format):
+        return True
+
+    return False
+
 def main():
     Title()
     
     #Collect initial parameters: template file name, word replace file
     print("Ensure your template file and replace file are in your Documents folder.")
-    tempFileName = input("Enter template file: ")    
-    repFileName = input("Enter number of words to replace file: ")
+
+    while True:
+        tempFileName = input("Enter template file: ")
+
+        if FileExists(tempFilename, ".docx"):
+            break
+        else:
+            print(" File does not exist.")
+
+    while True:
+        repFileName = input("Enter number of words to replace file: ")
+
+         if FileExists(repFileName, ".txt"):
+            break
+        else:
+            print(" File does not exist.")
 
     #Read and parse words to replace and how many files to create.
     repContent = ReadRepFile(repFileName)
