@@ -12,13 +12,30 @@ def Title():
     print()
 
 def ReadRepFile(repFile):
-   
+   """
+    Reads in the words to replace for each new file to be created
+
+    String -> String
+
+    Input: Words to be replace file name
+    Ouput: List of words to replace for each file
+   """
+
     with open(os.path.expanduser('~/Documents/' + repFile + ".txt")) as rFile:
         lines = rFile.readlines()
     lines = [x.strip().replace(" ", "").replace("=", ":").split(",") for x in lines]
     return lines
 
 def ReadTempFile(tempFile):
+    """
+    Reads in the content of the document of which the words are going to be replaced
+
+    String -> String
+
+    Input: Document file name
+    Ouput: String content of file
+   """
+
     doc = Document((os.path.expanduser('~/Documents/' + tempFile + ".docx")))
 
     docText = ""
@@ -28,13 +45,29 @@ def ReadTempFile(tempFile):
 
     return docText
 
-def ListToDic(li):      
+def ListToDic(li):
+    """
+    Converts list of strings separated by '=' or ':' to a dictionary
+
+    List[String] -> Dictionary
+
+    Input: List of strings
+    Ouput: Ditionary of words and their replacement
+   """      
     
     replaceDict = [dict([x.split(':') for x in item]) for item in li]
 
     return replaceDict     
 
 def TextReplace(doc, repDict):
+    """
+    Replaces the specified word with the specified replacement word.
+
+    (String, Dictionary) -> String
+
+    Input: String of document text, Dictionary of words to be replaced
+    Ouput: String of document content with replaced words.
+   """
 
     for key in repDict:
         
@@ -43,10 +76,18 @@ def TextReplace(doc, repDict):
     return doc
 
 def WriteToFile(fileContent, index):
+    """
+    Writes string form of document to a .docx file.
+
+    (String, Int) -> File
+
+    Input: Document content, File processing number
+    Ouput: .docx file.
+   """
+
     doc = Document()
 
     doc.add_paragraph(fileContent)
-
     doc.save(os.path.expanduser('~/Documents/file' + str(index) + '.docx'))
 
 def main():
