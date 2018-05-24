@@ -12,14 +12,14 @@ def Title():
     print()
 
 def ReadRepFile(repFile):
-   """
+    """
     Reads in the words to replace for each new file to be created
 
     String -> String
 
     Input: Words to be replace file name
     Ouput: List of words to replace for each file
-   """
+    """
     try:
         with open(os.path.expanduser('~/Documents/' + repFile + ".txt")) as rFile:
             lines = rFile.readlines()
@@ -108,7 +108,7 @@ def FileExists(fileName, format):
     Output: True if file exists, false otherwiese
     """
 
-    if os.path.isfile(os.path.expanduser('~/Documents/' + fileName + format):
+    if os.path.isfile(os.path.expanduser('~/Documents/' + fileName + format)):
         return True
 
     return False
@@ -122,7 +122,7 @@ def main():
     while True:
         tempFileName = input("Enter template file: ")
 
-        if FileExists(tempFilename, ".docx"):
+        if FileExists(tempFileName, ".docx"):
             break
         else:
             print(" File does not exist.")
@@ -130,7 +130,7 @@ def main():
     while True:
         repFileName = input("Enter number of words to replace file: ")
 
-         if FileExists(repFileName, ".txt"):
+        if FileExists(repFileName, ".txt"):
             break
         else:
             print(" File does not exist.")
