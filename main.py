@@ -5,11 +5,11 @@ import re
 def Title():
     print("==================================================================================")
     print("Automated Find and Replace Script")
-    print()
+    print("")
     print("Created By: Ashton Sidhu")
     print("Script that creates multiple files by replacing select words in a file template.")
     print("==================================================================================")
-    print()
+    print("")
 
 def ReadRepFile(repFile):
     """
