@@ -1,6 +1,9 @@
 from docx import Document
 import os
 import re
+import argparse
+
+PATH = os.path.expanduser('~/Documents/')
 
 def Title():
     print("==================================================================================")
@@ -21,7 +24,7 @@ def ReadRepFile(repFile):
     Ouput: List of words to replace for each file
     """
     try:
-        with open(os.path.expanduser('~/Documents/' + repFile + ".txt")) as rFile:
+        with open(PATH + repFile + ".txt") as rFile:
             lines = rFile.readlines()
         lines = [x.strip().replace("=", ":").split(",") for x in lines]
         return lines
@@ -41,7 +44,7 @@ def ReadTempFile(tempFile):
     Ouput: String content of file
    """
     try:
-        doc = Document((os.path.expanduser('~/Documents/' + tempFile + ".docx")))
+        doc = Document(PATH + tempFile + ".docx")
 
         docText = ""
         
@@ -94,9 +97,8 @@ def WriteToFile(fileContent, index):
    """
 
     doc = Document()
-
     doc.add_paragraph(fileContent)
-    doc.save(os.path.expanduser('~/Documents/file' + str(index) + '.docx'))
+    doc.save(PATH + 'file' + str(index) + '.docx')
 
 def FileExists(fileName, format):
     """
@@ -108,12 +110,12 @@ def FileExists(fileName, format):
     Output: True if file exists, false otherwiese
     """
 
-    if os.path.isfile(os.path.expanduser('~/Documents/' + fileName + format)):
+    if os.path.isfile(PATH + fileName + format):
         return True
 
     return False
 
-def main():
+def main(args):
     Title()
     
     #Collect initial parameters: template file name, word replace file
@@ -153,5 +155,10 @@ def main():
     print("All files have been created successfully.")
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description='Find and Replace words and phrases in a template document')
+    parser.add_argument('--doc', metavar='file', nargs='+', help='Template Document')
+    parser.add_argument('--temp', metavar='file', help='File of words to replace for each document')
+    args = parser.parse_args()
+
+    main(args)
     
