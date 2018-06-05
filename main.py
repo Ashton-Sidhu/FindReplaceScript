@@ -49,7 +49,7 @@ def ReadTempFile(tempFile):
         docText = ""
         
         for para in doc.paragraphs:
-            docText += para.text
+            docText += (para.text + '\n')
 
         return docText
 
