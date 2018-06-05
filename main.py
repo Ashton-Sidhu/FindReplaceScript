@@ -116,26 +116,30 @@ def FileExists(fileName, format):
     return False
 
 def main(args):
-    Title()
     
+    Title()
     #Collect initial parameters: template file name, word replace file
     print("Ensure your template file and replace file are in your Documents folder.")
 
-    while True:
-        tempFileName = input("Enter template file: ")
+    if (not args.doc and not args.temp):
+        while True:
+            tempFileName = input("Enter template file: ")
 
-        if FileExists(tempFileName, ".docx"):
-            break
-        else:
-            print(" File does not exist.")
+            if FileExists(tempFileName, ".docx"):
+                break
+            else:
+                print(" File does not exist.")
 
-    while True:
-        repFileName = input("Enter number of words to replace file: ")
+        while True:
+            repFileName = input("Enter number of words to replace file: ")
 
-        if FileExists(repFileName, ".txt"):
-            break
-        else:
-            print(" File does not exist.")
+            if FileExists(repFileName, ".txt"):
+                break
+            else:
+                print(" File does not exist.")
+    else:
+        repFileName = args.temp[0]
+        tempFileName = args.doc[0]
 
     #Read and parse words to replace and how many files to create.
     repContent = ReadRepFile(repFileName)
