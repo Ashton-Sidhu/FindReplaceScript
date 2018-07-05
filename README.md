@@ -15,6 +15,7 @@ OR
 ## Example File Structure Describing What Words To Replace
 
 but=but123,i=i123
+
 but=but456,i=i456
 
 Notes:
