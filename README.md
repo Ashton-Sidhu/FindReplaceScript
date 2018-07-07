@@ -23,3 +23,8 @@ Notes:
   - Can either use = or : when describing what word you want to replace
   - Each word replacement pair must be separated by a ,
   - No spaces between comma and the next word replacement pair (BUG for now)
+  
+ ## Known Issues
+ 
+ - No header support
+ - Space between comma and the next word in the word replacement text file removes spaces in the document.
