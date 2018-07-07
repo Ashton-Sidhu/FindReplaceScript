@@ -28,3 +28,8 @@ Notes:
  
  - No header support
  - Space between comma and the next word in the word replacement text file removes spaces in the document.
+ 
+ ## To-Do
+ 
+ - Add UI
+ - Host on website
