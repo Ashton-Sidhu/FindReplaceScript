@@ -2,8 +2,10 @@ from docx import Document
 import os
 import re
 import argparse
+from docx.shared import Pt
+from docx.shared import Inches
 
-PATH = os.path.expanduser('~/Documents/')
+PATH = os.path.expanduser('~\\Documents\\')
 
 def Title():
     print("==================================================================================")
@@ -97,7 +99,22 @@ def WriteToFile(fileContent, index):
    """
 
     doc = Document()
-    doc.add_paragraph(fileContent)
+    run = doc.add_paragraph(fileContent)
+    # paragraph_format = run.paragraph_format
+    # style = doc.styles['Normal']
+    # font = style.font
+    # font.name = 'Times New Roman'
+    # font.size = Pt(11)
+    # run.style = doc.styles['Normal']
+    # paragraph_format.line_spacing = 1.0
+
+    # sections = doc.sections
+    # for section in sections:
+    #     section.top_margin = Inches(0.59)
+    #     section.bottom_margin = Inches(0.39)
+    #     section.left_margin = Inches(1.25)
+    #     section.right_margin = Inches(1.25)
+
     doc.save(PATH + 'file' + str(index) + '.docx')
 
 def FileExists(fileName, format):
@@ -161,7 +178,7 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Find and Replace words and phrases in a template document')
     parser.add_argument('--doc', metavar='file', nargs='+', help='Template Document')
-    parser.add_argument('--temp', metavar='file', help='File of words to replace for each document')
+    parser.add_argument('--temp', metavar='file', nargs='+', help='File of words to replace for each document')
     args = parser.parse_args()
 
     main(args)
