@@ -10,7 +10,7 @@ Script that creates multiple files by replacing select words or phrases in a fil
 
 OR
 
-2) Run 'python main.py --doc YourTemplateDocument --temp YourFileDescribingWhatWordsToReplace
+2) Run 'python FindReplaceScript.py --doc YourTemplateDocument --temp YourFileDescribingWhatWordsToReplace'
 
 ## Example File Structure Describing What Words To Replace
 
